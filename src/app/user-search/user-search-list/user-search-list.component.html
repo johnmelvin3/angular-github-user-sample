@@ -1,0 +1,15 @@
+<form class="">
+  <mat-form-field>
+    <input matInput placeholder="Search for a user..." [(ngModel)]="searchTerm" [ngModelOptions]="{ standalone: true }" (keyup)="onKeyUp()">
+    <button mat-button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="searchTerm = ''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</form>
+<div *ngIf="isLoading; else resultsTemplate">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+</div>
+
+<ng-template #resultsTemplate>
+  <app-user-search-results [results]="searchResults" *ngIf="searchResults && searchTerm"></app-user-search-results>
+</ng-template>
